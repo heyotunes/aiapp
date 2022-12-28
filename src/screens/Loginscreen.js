@@ -10,8 +10,31 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Entypo } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import * as Random from "expo-random";
+import * as Google from "expo-auth-session/providers/google";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+
+import { auth } from "../firebase";
+WebBrowser.maybeCompleteAuthSession();
 
 const Loginscreens = () => {
+  const navigation = useNavigation();
+
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId:
+      "42942344839-df78rf73c7p8k93jktqn4d50qqf5kd6h.apps.googleusercontent.com",
+  });
+  useEffect(() => {
+    console.log(response);
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential);
+      navigation.navigate("Main", { response });
+    }
+  }, [response]);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -28,7 +51,13 @@ const Loginscreens = () => {
 
       <View style={styles.Btncontainer}>
         <LinearGradient colors={["#1D76C9", "#2D52D3"]} style={styles.Btnbg}>
-          <TouchableOpacity style={styles.touch1}>
+          <TouchableOpacity
+            disabled={!request}
+            onPress={() => {
+              promptAsync();
+            }}
+            style={styles.touch1}
+          >
             <Text style={styles.btntext}>SIGN IN WITH GOOGLE</Text>
             <Entypo
               name="mail"

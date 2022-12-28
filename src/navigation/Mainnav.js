@@ -6,10 +6,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Acctscreens from "../screens/Acctscreen";
 import Advscreen from "../screens/Advscreen";
-import Homescreen from "../screens/Homescreen";
+import Homescreens from "../screens/Homescreen";
 import Loginscreens from "../screens/Loginscreen";
 import Productscreen from "../screens/Productscreen";
 import Profilescreen from "../screens/Profilescreen";
+import Imagescreens from "../screens/Imagescreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,8 +18,7 @@ const Stack = createNativeStackNavigator();
 
 const TAB_ICON = {
   Home: "home-sharp",
-  Account: "settings",
-  Chat: "chatbox-ellipses",
+  Acct: "settings",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -27,7 +27,7 @@ const createScreenOptions = ({ route }) => {
     tabBarIcon: ({ size, color }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),
-    tabBarStyle: { backgroundColor: "black" },
+    tabBarStyle: { backgroundColor: "#2C55D3" },
   };
 };
 
@@ -36,16 +36,16 @@ const Control = () => {
     <Tab.Navigator
       screenOptions={createScreenOptions}
       tabBarOptions={{
-        activeTintColor: "#F56B1D",
+        activeTintColor: "#F2C159",
         inactiveTintColor: "white",
       }}
       initialRouteName="Homepage"
     >
       <Tab.Screen
         name="Home"
-        component={Homescreen}
+        component={Homescreens}
         options={{
-          headerShown: true,
+          headerShown: false,
           headerStyle: {
             backgroundColor: "black",
           },
@@ -79,6 +79,21 @@ const Acctnav = () => {
         options={{ headerShown: false }}
         name="Login"
         component={Loginscreens}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Adv"
+        component={Advscreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Product"
+        component={Productscreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Image"
+        component={Imagescreens}
       />
 
       <Stack.Screen
