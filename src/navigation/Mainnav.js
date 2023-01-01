@@ -5,11 +5,12 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Acctscreens from "../screens/Acctscreen";
-import Advscreen from "../screens/Advscreen";
+
 import Homescreens from "../screens/Homescreen";
 import Loginscreens from "../screens/Loginscreen";
 import Productscreen from "../screens/Productscreen";
 import Profilescreen from "../screens/Profilescreen";
+
 import Imagescreens from "../screens/Imagescreen";
 
 const Tab = createBottomTabNavigator();
@@ -59,7 +60,7 @@ const Control = () => {
         name="Acct"
         component={Acctscreens}
         options={{
-          headerShown: true,
+          headerShown: false,
           headerStyle: {
             backgroundColor: "black",
           },
@@ -80,11 +81,7 @@ const Acctnav = () => {
         name="Login"
         component={Loginscreens}
       />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Adv"
-        component={Advscreen}
-      />
+
       <Stack.Screen
         options={{ headerShown: false }}
         name="Product"
@@ -94,6 +91,11 @@ const Acctnav = () => {
         options={{ headerShown: false }}
         name="Image"
         component={Imagescreens}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Profile"
+        component={Profilescreen}
       />
 
       <Stack.Screen

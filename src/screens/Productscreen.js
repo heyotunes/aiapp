@@ -1,54 +1,290 @@
-import React, { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
-  TouchableOpacity,
+  Text,
   Image,
+  Button,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
 
 const Productscreen = () => {
+  const navigation = useNavigation();
+  const [response, setResponse] = useState(null);
+  const [body, setBody] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  let url;
+  if (response && response.data && response.data[0]) {
+    url = response.data[0].url;
+  }
+
+  const [fontsLoaded] = useFonts({
+    Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
+    interblack: require("../assets/fonts/Inter-Black.ttf"),
+    interextra: require("../assets/fonts/Inter-ExtraBold.ttf"),
+    interregular: require("../assets/fonts/Inter-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const handlePress1 = () => {
+    navigation.navigate("Home");
+  };
+
+  const callAi = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("https://api.openai.com/v1/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer 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`,
+        },
+        body: JSON.stringify({
+          model: "text-davinci-003",
+          prompt: body,
+          temperature: 0.8,
+          max_tokens: 60,
+          top_p: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
+        }),
+      });
+      const json = await res.json();
+      setResponse(json);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+  console.log(response);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.photocontainer}>
-        <Text>i am product screen </Text>
+    <View>
+      <View style={styles.headercontainer}>
+        <LinearGradient
+          colors={["#1D76C9", "#2D52D3"]}
+          style={styles.logocontainer}
+        >
+          <View style={styles.Image2container}>
+            <TouchableOpacity onPress={handlePress1}>
+              <Ionicons name="chevron-back" size={34} color="white" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.Imagecontainer}>
+            <Text style={styles.Imagecontainertext}>SYNTELLIGENT</Text>
+          </View>
+        </LinearGradient>
       </View>
-    </SafeAreaView>
+      <ScrollView>
+        <View style={styles.guidetext}>
+          <Text style={styles.guidetext1}>
+            This AI is capable of performing tasks like
+          </Text>
+        </View>
+
+        <View style={styles.guidetextlist}>
+          <Text style={styles.guidetext1}>
+            Grammar correction, Summarize Difficult Text, Generate Interview
+            Questions, Create Ad for products, Suggest names for Product,
+            Creates Essay outlines, Any thing you can think of.
+          </Text>
+        </View>
+
+        <View style={styles.guidetext}>
+          <Text style={styles.guidetext1}>
+            Type in your task in the prompt below and let AI respond with the
+            suitable response
+          </Text>
+        </View>
+
+        <View style={styles.view1}>
+          <Text style={styles.guidetext2}>
+            EG: "Create a list of 8 questions for my interview with a science
+            fiction author."
+          </Text>
+          <TextInput
+            placeholder="Type prompt..."
+            onChangeText={setBody}
+            value={body}
+            style={styles.input1}
+          />
+          <TouchableOpacity onPress={callAi} style={styles.touch1}>
+            <Text style={styles.btntext}>SUBMIT</Text>
+            <FontAwesome
+              style={styles.btntexticon1}
+              name="repeat"
+              size={34}
+              color="black"
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.respbox}>
+          {response && (
+            <Text style={styles.respboxtext}>
+              {JSON.stringify(response.choices[0].text.slice(3, -2))}
+            </Text>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "black",
+    padding: 0,
   },
 
-  movieText: {
-    fontSize: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+  input1: {
+    height: 60,
+    fontSize: 18,
+    width: 380,
+    paddingLeft: 10,
+    paddingTop: 0,
+    backgroundColor: "#F5F5F5",
+    color: "black",
+    borderWidth: 1,
+    borderColor: "#9D9D9D",
+    borderRadius: 10,
   },
-  title: {
-    fontSize: 32,
+
+  view1: {
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderTopWidth: 0,
+    borderColor: "gray",
+    paddingRight: 5,
+    paddingTop: 40,
+    paddingBottom: 35,
+  },
+  logocontainer: {
+    alignItems: "center",
+    backgroundColor: "blue",
+    height: 120,
+    width: 430,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  Imagecontainer: {
+    marginTop: 40,
+    marginRight: 35,
+  },
+  headertext: {
+    fontSize: 45,
+    color: "#2457C5",
+    fontWeight: "bold",
+    fontFamily: "League",
+    marginLeft: 10,
+  },
+
+  Image2container: {
+    marginTop: 40,
+    marginLeft: 15,
+  },
+  Imagecontainertext: {
+    color: "white",
+    fontSize: 20,
     fontWeight: "bold",
   },
-  btn: {
-    height: 60,
+  btntexticon1: {
+    color: "white",
+    textAlign: "center",
+
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingTop: 0,
+    fontWeight: "bold",
+  },
+  btntexticon: {
+    color: "white",
+    textAlign: "center",
+
+    fontSize: 20,
+    paddingLeft: 20,
+    paddingTop: 0,
+    fontWeight: "bold",
+  },
+  btntext: {
+    color: "white",
+    textAlign: "center",
+
+    fontSize: 20,
+
+    paddingTop: 0,
+    fontWeight: "bold",
+  },
+  touch1: {
+    alignItems: "center",
+    justifyContent: "center",
     width: 300,
-    borderRadius: 20,
-    backgroundColor: "#F56B1D",
-    marginBottom: 430,
+    height: 50,
     marginTop: 30,
+    flexDirection: "row",
+    borderRadius: 20,
+    backgroundColor: "#3997EE",
   },
-  photo: {
-    height: 80,
-    marginTop: -150,
+  guidetext: {
+    justifyContent: "flex-end",
+    marginTop: 20,
+    marginLeft: 30,
+    width: 350,
   },
-  photocontainer: {
-    marginTop: 220,
+  guidetextlist: {
+    justifyContent: "flex-end",
+    marginTop: 5,
+    marginLeft: 30,
+    width: 350,
+  },
+  guidetext1: {
+    textAlign: "left",
+    fontSize: 17,
+    fontWeight: "400",
+    color: "#2266A5",
+    fontFamily: "interregular",
+  },
+
+  guidetext2: {
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#7E7E7E",
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontFamily: "interregular",
+  },
+  respbox: {
+    width: 350,
+    height: 350,
+    marginLeft: 40,
+    backgroundColor: "#3997EE",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 200,
+  },
+  respboxtext: {
+    fontSize: 20,
+    fontWeight: "500",
+    fontStyle: "normal",
+    color: "white",
+    textAlign: "justify",
+    fontFamily: "interregular",
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 });
 

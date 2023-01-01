@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Entypo } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 import * as WebBrowser from "expo-web-browser";
 import * as Random from "expo-random";
 import * as Google from "expo-auth-session/providers/google";
@@ -35,64 +36,64 @@ const Loginscreens = () => {
       navigation.navigate("Main", { response });
     }
   }, [response]);
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#1D76C9", "#2D52D3"]}
-        style={styles.logocontainer}
-      >
-        <View style={styles.Imagecontainer}>
-          <Image source={require("../assets/icon2.png")} />
-        </View>
-        <View style={styles.Textcontainer}>
-          <Image source={require("../assets/intelli.png")} />
-        </View>
-      </LinearGradient>
+  const [fontsLoaded] = useFonts({
+    Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
+  });
 
-      <View style={styles.Btncontainer}>
-        <LinearGradient colors={["#1D76C9", "#2D52D3"]} style={styles.Btnbg}>
-          <TouchableOpacity
-            disabled={!request}
-            onPress={() => {
-              promptAsync();
-            }}
-            style={styles.touch1}
-          >
-            <Text style={styles.btntext}>SIGN IN WITH GOOGLE</Text>
-            <Entypo
-              name="mail"
-              size={34}
-              color="white"
-              style={styles.btnicon}
-            />
-          </TouchableOpacity>
-        </LinearGradient>
+  if (!fontsLoaded) {
+    return null;
+  }
+  return (
+    <LinearGradient
+      colors={["#1D76C9", "#2D52D3"]}
+      style={styles.logocontainer}
+    >
+      <View style={styles.Imagecontainer}>
+        <Image source={require("../assets/icon2.png")} />
       </View>
-    </View>
+      <View style={styles.Textcontainer}>
+        <Text style={styles.logotext}>SYNTELLIGENT</Text>
+      </View>
+
+      <View style={styles.Textcontainer}>
+        <Text style={styles.introtext}>SYNTELLIGENT</Text>
+      </View>
+      <View style={styles.Btncontainer}>
+        <TouchableOpacity
+          disabled={!request}
+          onPress={() => {
+            promptAsync();
+          }}
+          style={styles.touch1}
+        >
+          <Text style={styles.btntext}>GOOGLE SIGN-IN</Text>
+          <Entypo name="mail" size={30} color="white" style={styles.btnicon} />
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
   logocontainer: {
     alignItems: "center",
-    backgroundColor: "blue",
-    height: 400,
-    width: 430,
-    borderBottomEndRadius: 60,
-    borderBottomLeftRadius: 60,
+
+    flex: 1,
   },
   Imagecontainer: {
     marginTop: 100,
   },
   Textcontainer: {
-    marginTop: -200,
+    marginTop: 60,
+  },
+  logotext: {
+    fontSize: 30,
+    color: "white",
+    fontWeight: "bold",
+    fontFamily: "Orbitron",
   },
   Btncontainer: {
-    marginTop: 380,
+    marginTop: 450,
   },
   Btnbg: {
     borderRadius: 20,
@@ -104,23 +105,30 @@ const styles = StyleSheet.create({
     elevation: 40,
     shadowRadius: 100,
     shadowOffset: { width: 1, height: 13 },
+    borderColor: "white",
   },
   btntext: {
     color: "white",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 18,
 
-    paddingTop: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
     fontWeight: "bold",
   },
   touch1: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "white",
+    width: 360,
+    borderRadius: 20,
   },
   btnicon: {
     marginTop: 15,
     marginLeft: 12,
+    paddingBottom: 20,
   },
 });
 

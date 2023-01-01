@@ -16,7 +16,9 @@ const Homescreens = () => {
   const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
-    League: require("../assets/fonts/LeagueSpartan-Black.ttf"),
+    interblack: require("../assets/fonts/Inter-Black.ttf"),
+    interextra: require("../assets/fonts/Inter-ExtraBold.ttf"),
+    interregular: require("../assets/fonts/Inter-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -26,9 +28,7 @@ const Homescreens = () => {
   const handlePress1 = () => {
     navigation.navigate("Image");
   };
-  const handlePress3 = () => {
-    navigation.navigate("Adv");
-  };
+
   const handlePress2 = () => {
     navigation.navigate("Product");
   };
@@ -41,7 +41,7 @@ const Homescreens = () => {
           style={styles.logocontainer}
         >
           <View style={styles.Image2container}>
-            <Text style={styles.Image2containertext}>INTELLI</Text>
+            <Text style={styles.Image2containertext}>SYNTELLIGENT</Text>
           </View>
           <View style={styles.Imagecontainer}>
             <Image source={require("../assets/icon1.png")} />
@@ -54,38 +54,48 @@ const Homescreens = () => {
       </View>
       <ScrollView style={styles.contentContainer}>
         <View style={styles.aioptions}>
-          <View style={styles.imagesection}>
-            <TouchableOpacity onPress={handlePress1}>
-              <Image
-                style={styles.Image1}
-                source={require("../assets/int1.jpg")}
-              />
-            </TouchableOpacity>
-
-            <Text style={styles.text1}>AI IMAGE </Text>
-            <Text style={styles.text11}> GENERATOR</Text>
+          <TouchableOpacity onPress={handlePress1}>
+            <LinearGradient
+              colors={["#FF6363", "#D2617C"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress1}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/photos3.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>IMAGE-GENERATOR</Text>
+            <Text style={styles.text11}>
+              Use AI to convert Text to beautiful images
+            </Text>
           </View>
 
-          <View style={styles.imagesection}>
-            <TouchableOpacity onPress={handlePress2}>
-              <Image
-                style={styles.Image2}
-                source={require("../assets/int3.jpg")}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text2}>NAME</Text>
-            <Text style={styles.text22}>GENERATOR</Text>
-          </View>
-
-          <View style={styles.imagesection}>
-            <TouchableOpacity onPress={handlePress3}>
-              <Image
-                style={styles.Image3}
-                source={require("../assets/int2.jpg")}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text3}>AI-AD</Text>
-            <Text style={styles.text33}>GENERATOR</Text>
+          <TouchableOpacity onPress={handlePress2}>
+            <LinearGradient
+              colors={["#4375F6", "#312FA3"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress2}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/brain3.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Syntelligent</Text>
+            <Text style={styles.text11}>
+              Ask AI any questions and perform any task you can think of
+            </Text>
           </View>
         </View>
         <View style={styles.freespace}></View>
@@ -107,6 +117,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  Aicontainer: {
+    alignItems: "center",
+    backgroundColor: "blue",
+    height: 200,
+    width: 350,
+    borderRadius: 5,
+    marginBottom: 40,
+    marginTop: 30,
+  },
   Imagecontainer: {
     marginTop: 40,
     marginRight: 40,
@@ -115,7 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     color: "#2457C5",
     fontWeight: "bold",
-    fontFamily: "League",
+    fontFamily: "interblack",
     marginLeft: 10,
   },
 
@@ -124,11 +143,11 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   Image2container: {
-    marginTop: 40,
-    marginLeft: 40,
+    marginTop: 45,
+    marginLeft: 25,
   },
   Image2containertext: {
-    fontSize: 30,
+    fontSize: 25,
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
@@ -138,95 +157,40 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   Image1: {
-    height: 200,
-    width: 350,
-    marginBottom: 80,
-    marginTop: 20,
-    borderRadius: 10,
-    borderColor: "#F2C159",
-    borderWidth: 5,
+    height: 100,
+    width: 100,
+    marginBottom: 100,
+    marginTop: 45,
   },
-  Image2: {
-    height: 200,
-    width: 350,
-    marginBottom: 80,
-    borderRadius: 10,
-    borderColor: "#F2C159",
-    borderWidth: 5,
-  },
-  Image3: {
-    height: 200,
-    width: 350,
-    borderRadius: 10,
-    marginBottom: 300,
-    borderColor: "#F2C159",
-    borderWidth: 5,
-  },
+
   text1: {
-    position: "absolute",
-    top: 70,
-    left: 60,
-    alignSelf: "center",
-    fontSize: 50,
+    alignSelf: "left",
+    fontSize: 20,
     fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
+    color: "black",
+    fontFamily: "interextra",
+    marginBottom: 5,
   },
   text11: {
-    position: "absolute",
-    top: 120,
-    left: 20,
-    alignSelf: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
+    alignSelf: "left",
+    fontSize: 18,
+    fontWeight: "light",
+    color: "black",
+    fontFamily: "interregular",
+    marginBottom: 20,
   },
-  text2: {
-    position: "absolute",
-    top: 60,
-    left: 100,
-    alignSelf: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
+  contentdescription: {
+    justifyContent: "flex-end",
+    marginTop: -20,
+    marginLeft: 1,
   },
-  text22: {
-    position: "absolute",
-    top: 110,
-    left: 30,
-    alignSelf: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
-  },
-  text3: {
-    position: "absolute",
-    top: 60,
-    left: 110,
-    alignSelf: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
-  },
-  text33: {
-    position: "absolute",
-    top: 110,
-    left: 40,
-    alignSelf: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "League",
-  },
-  imagesection: {
-    position: "relative",
-  },
+
   contentContainer: {
     paddingLeft: 5,
+  },
+  freespace: {
+    marginTop: 200,
+    marginBottom: 50,
   },
 });
 

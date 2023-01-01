@@ -32,8 +32,9 @@ const Imagescreens = () => {
 
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
-    League: require("../assets/fonts/LeagueSpartan-Black.ttf"),
-    Inter: require("../assets/fonts/Inter-ExtraBold.ttf"),
+    interblack: require("../assets/fonts/Inter-Black.ttf"),
+    interextra: require("../assets/fonts/Inter-ExtraBold.ttf"),
+    interregular: require("../assets/fonts/Inter-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -268,16 +269,18 @@ const styles = StyleSheet.create({
     width: 350,
   },
   guidetext1: {
-    textAlign: "center",
-    fontSize: 20,
+    textAlign: "left",
+    fontSize: 18,
     fontWeight: "400",
     color: "#2266A5",
+    fontFamily: "interregular",
   },
   guidetext2: {
     fontSize: 15,
     fontWeight: "400",
     color: "#7E7E7E",
     paddingBottom: 10,
+    fontFamily: "interregular",
   },
   Photocontainer: {
     justifyContent: "center",
