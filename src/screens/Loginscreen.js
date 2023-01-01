@@ -15,6 +15,7 @@ import * as WebBrowser from "expo-web-browser";
 import * as Random from "expo-random";
 import * as Google from "expo-auth-session/providers/google";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { GOOGLE_KEYS } from "@env";
 
 import { auth } from "../firebase";
 WebBrowser.maybeCompleteAuthSession();
@@ -23,8 +24,7 @@ const Loginscreens = () => {
   const navigation = useNavigation();
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId:
-      "42942344839-df78rf73c7p8k93jktqn4d50qqf5kd6h.apps.googleusercontent.com",
+    clientId: `${GOOGLE_KEYS}`,
   });
   useEffect(() => {
     console.log(response);
