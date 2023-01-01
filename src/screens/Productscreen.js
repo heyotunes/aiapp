@@ -16,7 +16,9 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
+import { KEYS } from "@env";
 
+console.log(KEYS);
 const Productscreen = () => {
   const navigation = useNavigation();
   const [response, setResponse] = useState(null);
@@ -49,7 +51,7 @@ const Productscreen = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${KEYS}`,
         },
         body: JSON.stringify({
           model: "text-davinci-003",
@@ -268,9 +270,9 @@ const styles = StyleSheet.create({
     fontFamily: "interregular",
   },
   respbox: {
-    width: 350,
+    width: 370,
     height: 350,
-    marginLeft: 40,
+    marginLeft: 22,
     backgroundColor: "#3997EE",
     justifyContent: "center",
     borderRadius: 10,

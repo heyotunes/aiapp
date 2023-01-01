@@ -38,6 +38,7 @@ const Loginscreens = () => {
   }, [response]);
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
+    interregular: require("../assets/fonts/Inter-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -56,7 +57,9 @@ const Loginscreens = () => {
       </View>
 
       <View style={styles.Textcontainer}>
-        <Text style={styles.introtext}>SYNTELLIGENT</Text>
+        <Text style={styles.introtext}>
+          Smart tools for creators powered by AI
+        </Text>
       </View>
       <View style={styles.Btncontainer}>
         <TouchableOpacity
@@ -92,8 +95,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Orbitron",
   },
+  Textcontainer: {
+    marginTop: 60,
+  },
+  introtext: {
+    fontSize: 15,
+    color: "white",
+    fontWeight: "bold",
+    fontFamily: "interregular",
+  },
   Btncontainer: {
-    marginTop: 450,
+    marginTop: 400,
   },
   Btnbg: {
     borderRadius: 20,

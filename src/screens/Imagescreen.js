@@ -19,6 +19,7 @@ import { useFonts } from "expo-font";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import * as Permissions from "expo-permissions";
+import { KEYS } from "@env";
 
 const Imagescreens = () => {
   const navigation = useNavigation();
@@ -80,7 +81,7 @@ const Imagescreens = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${KEYS}`,
         },
         body: JSON.stringify({
           prompt: body,
