@@ -58,7 +58,7 @@ const Loginscreens = () => {
 
       <View style={styles.Textcontainer}>
         <Text style={styles.introtext}>
-          Smart tools for creators powered by AI
+          Harness the power of AI for smarter decisions
         </Text>
       </View>
       <View style={styles.Btncontainer}>

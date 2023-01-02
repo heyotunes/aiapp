@@ -11,8 +11,20 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../firebase";
 
 const Homescreens = () => {
+  useEffect(
+    () =>
+      onSnapshot(doc(db, "Users", auth.currentUser.uid), (snapshot) => {
+        if (!snapshot.exists()) {
+          navigation.navigate("Profile");
+        }
+      }),
+    []
+  );
+
   const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),

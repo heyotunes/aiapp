@@ -137,7 +137,7 @@ const Productscreen = () => {
         <View style={styles.respbox}>
           {response && (
             <Text style={styles.respboxtext}>
-              {JSON.stringify(response.choices[0].text.slice(3, -2))}
+              {JSON.stringify(response.choices[0].text)}
             </Text>
           )}
         </View>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     color: "#2457C5",
     fontWeight: "bold",
-    fontFamily: "League",
+
     marginLeft: 10,
   },
 
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   respboxtext: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "500",
     fontStyle: "normal",
     color: "white",

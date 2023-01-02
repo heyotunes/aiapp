@@ -4,12 +4,12 @@
     "slug": "aiapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/play.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/assets/blue3.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2368CD"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
