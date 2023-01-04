@@ -53,12 +53,12 @@ const Loginscreens = () => {
         <Image source={require("../assets/icon2.png")} />
       </View>
       <View style={styles.Textcontainer}>
-        <Text style={styles.logotext}>SYNTELLIGENT</Text>
+        <Text style={styles.logotext}>NEURAL</Text>
       </View>
 
       <View style={styles.Textcontainer}>
         <Text style={styles.introtext}>
-          Harness the power of AI for smarter decisions
+          Unleashing the power of artificial intelligence
         </Text>
       </View>
       <View style={styles.Btncontainer}>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   logotext: {
-    fontSize: 30,
+    fontSize: 40,
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontFamily: "interregular",
   },
   Btncontainer: {
-    marginTop: 400,
+    marginTop: 380,
   },
   Btnbg: {
     borderRadius: 20,

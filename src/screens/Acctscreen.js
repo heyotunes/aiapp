@@ -45,7 +45,7 @@ const Acctscreens = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.Imagecontainer}>
-          <Text style={styles.Imagecontainertext}>SYNTELLIGENT</Text>
+          <Text style={styles.Imagecontainertext}>NEURAL</Text>
         </View>
       </LinearGradient>
 

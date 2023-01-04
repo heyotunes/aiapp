@@ -53,7 +53,7 @@ const Homescreens = () => {
           style={styles.logocontainer}
         >
           <View style={styles.Image2container}>
-            <Text style={styles.Image2containertext}>SYNTELLIGENT</Text>
+            <Text style={styles.Image2containertext}>NEURAL</Text>
           </View>
           <View style={styles.Imagecontainer}>
             <Image source={require("../assets/icon1.png")} />
