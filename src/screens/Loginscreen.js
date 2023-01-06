@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   Textcontainer: {
-    marginTop: 60,
+    marginTop: 30,
   },
   logotext: {
     fontSize: 40,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontFamily: "Orbitron",
   },
   Textcontainer: {
-    marginTop: 60,
+    marginTop: 30,
   },
   introtext: {
     fontSize: 15,

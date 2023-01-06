@@ -7,7 +7,7 @@
     "icon": "./src/assets/play.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/blue3.png",
+      "image": "./src/assets/ply1.png",
       "resizeMode": "cover",
       "backgroundColor": "#2368CD"
     },
