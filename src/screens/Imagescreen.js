@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: "Inter",
+    fontFamily: "Orbitron",
   },
   btntexticon1: {
     color: "white",

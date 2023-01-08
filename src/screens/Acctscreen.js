@@ -39,11 +39,6 @@ const Acctscreens = () => {
         colors={["#1D76C9", "#2D52D3"]}
         style={styles.logocontainer}
       >
-        <View style={styles.Image2container}>
-          <TouchableOpacity onPress={handlePress1}>
-            <Ionicons name="chevron-back" size={34} color="white" />
-          </TouchableOpacity>
-        </View>
         <View style={styles.Imagecontainer}>
           <Text style={styles.Imagecontainertext}>NEURAL</Text>
         </View>
@@ -79,7 +74,7 @@ const styles = StyleSheet.create({
   },
   Imagecontainer: {
     marginTop: 40,
-    marginRight: 35,
+    marginLeft: 305,
   },
   headertext: {
     fontSize: 45,
@@ -89,14 +84,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  Image2container: {
-    marginTop: 40,
-    marginLeft: 15,
-  },
   Imagecontainertext: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "Orbitron",
   },
   touch1: {
     height: 60,
