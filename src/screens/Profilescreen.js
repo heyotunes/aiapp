@@ -64,7 +64,7 @@ const Profilescreen = () => {
   };
 
   const handlePress1 = () => {
-    navigation.navigate("Acct");
+    navigation.navigate("Profile");
   };
 
   return (
@@ -105,15 +105,7 @@ const Profilescreen = () => {
               onChangeText={setOccupation}
               placeholder="What kind of job are you into?"
             />
-            <Text style={styles.textguide}>Phone no</Text>
-            <TextInput
-              style={styles.inputText}
-              value={phonenumber}
-              onChangeText={setPhonenumber}
-              placeholder="Enter your phonenumber"
-              keyboardType="numeric"
-              maxLength={10}
-            />
+
             <Text style={styles.textguide}>College</Text>
             <TextInput
               style={styles.inputText}

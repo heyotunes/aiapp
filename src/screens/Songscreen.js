@@ -16,12 +16,11 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
-import * as FileSystem from "expo-file-system";
-import * as MediaLibrary from "expo-media-library";
-import * as Permissions from "expo-permissions";
 import { KEYS } from "@env";
+
 console.log(KEYS);
-const Imagescreens = () => {
+
+const Songscreen = () => {
   const navigation = useNavigation();
   const [response, setResponse] = useState(null);
   const [body, setBody] = useState("");
@@ -42,51 +41,27 @@ const Imagescreens = () => {
     return null;
   }
 
-  const askForPermission = async () => {
-    const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
-    if (status === "granted") {
-      console.log("Media library permission granted");
-    } else {
-      console.log("Media library permission denied");
-    }
-  };
-
-  const addToMediaLibrary = async () => {
-    const { uri } = await FileSystem.downloadAsync(
-      response.data[0].url,
-      FileSystem.cacheDirectory + "image.jpg"
-    );
-    const asset = await MediaLibrary.createAssetAsync(uri);
-    console.log("Asset added to media library:", asset);
-  };
-
-  const downloadImage = async () => {
-    await askForPermission();
-    const { uri } = await FileSystem.downloadAsync(
-      response.data[0].url,
-      FileSystem.cacheDirectory + "image.jpg"
-    );
-    console.log("Finished downloading to ", uri);
-    addToMediaLibrary();
-  };
-
   const handlePress1 = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Product");
   };
 
   const callAi = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch("https://api.openai.com/v1/images/generations", {
+      const res = await fetch("https://api.openai.com/v1/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${KEYS}`,
         },
         body: JSON.stringify({
+          model: "text-davinci-003",
           prompt: body,
-          n: 1,
-          size: "1024x1024",
+          temperature: 0.9,
+          max_tokens: 160,
+          top_p: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
         }),
       });
       const json = await res.json();
@@ -112,20 +87,28 @@ const Imagescreens = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.Imagecontainer}>
-            <Text style={styles.Imagecontainertext}>IMAGE-GENERATOR</Text>
+            <Text style={styles.Imagecontainertext}>Song Composer</Text>
           </View>
         </LinearGradient>
       </View>
       <ScrollView>
         <View style={styles.guidetext}>
           <Text style={styles.guidetext1}>
-            Type in the text prompt below and let AI turn your text to beautiful
-            AI images
+            This AI is capable of composing a song from scratch
+          </Text>
+        </View>
+
+        <View style={styles.guidetext}>
+          <Text style={styles.guidetext1}>
+            Type in your task in the prompt below and let AI respond with the
+            suitable response
           </Text>
         </View>
 
         <View style={styles.view1}>
-          <Text style={styles.guidetext2}>EG: " A white lion "</Text>
+          <Text style={styles.guidetext2}>
+            "Compose a song with these words "blue, love and sky"
+          </Text>
           <TextInput
             placeholder="Type prompt..."
             onChangeText={setBody}
@@ -133,7 +116,7 @@ const Imagescreens = () => {
             style={styles.input1}
           />
           <TouchableOpacity onPress={callAi} style={styles.touch1}>
-            <Text style={styles.btntext}>GET-IMAGE</Text>
+            <Text style={styles.btntext}>Compose</Text>
             <FontAwesome
               style={styles.btntexticon1}
               name="repeat"
@@ -143,27 +126,13 @@ const Imagescreens = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.Photocontainer}>
-          {isLoading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : (
-            <Image source={{ uri: url }} style={{ width: 350, height: 450 }} />
+        <View style={styles.respbox}>
+          {response && (
+            <Text style={styles.respboxtext}>
+              {JSON.stringify(response.choices[0].text.split("\n").join(""))}
+            </Text>
           )}
         </View>
-        {response && (
-          <View style={styles.Downloadcontainer}>
-            <TouchableOpacity onPress={downloadImage} style={styles.touch1}>
-              <Text style={styles.btntext}>DOWNLOAD</Text>
-
-              <FontAwesome
-                style={styles.btntexticon}
-                name="cloud-download"
-                size={34}
-                color="black"
-              />
-            </TouchableOpacity>
-          </View>
-        )}
       </ScrollView>
     </View>
   );
@@ -213,7 +182,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     color: "#2457C5",
     fontWeight: "bold",
-    fontFamily: "League",
+
     marginLeft: 10,
   },
 
@@ -222,7 +191,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   Imagecontainertext: {
-    color: "white",
+    color: "#EEBA00",
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Orbitron",
@@ -259,42 +228,61 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 370,
     height: 50,
-    marginTop: 10,
+    marginTop: 30,
     flexDirection: "row",
     borderRadius: 20,
-    backgroundColor: "#3997EE",
+    backgroundColor: "#EEBA00",
   },
   guidetext: {
-    justifyContent: "center",
+    justifyContent: "flex-end",
     marginTop: 20,
+    marginLeft: 30,
+    width: 350,
+  },
+  guidetextlist: {
+    justifyContent: "flex-end",
+    marginTop: 5,
     marginLeft: 30,
     width: 350,
   },
   guidetext1: {
     textAlign: "left",
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "400",
-    color: "#2266A5",
+    color: "black",
     fontFamily: "interregular",
   },
+
   guidetext2: {
     fontSize: 15,
     fontWeight: "400",
     color: "#7E7E7E",
     paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
     fontFamily: "interregular",
   },
-  Photocontainer: {
+  respbox: {
+    width: 370,
+    height: 650,
+    marginLeft: 22,
+    backgroundColor: "#F3F3F3",
     justifyContent: "center",
-    marginLeft: 40,
-    marginTop: 30,
-    marginBottom: 0,
-  },
-  Downloadcontainer: {
-    marginLeft: 65,
-    flexDirection: "column",
+    borderRadius: 10,
     marginBottom: 200,
+  },
+  respboxtext: {
+    fontSize: 18,
+    fontWeight: "500",
+    fontStyle: "normal",
+    color: "black",
+
+    fontFamily: "interregular",
+    paddingLeft: 15,
+    paddingRight: 5,
+    letterSpacing: 1,
+    lineHeight: 40,
   },
 });
 
-export default Imagescreens;
+export default Songscreen;

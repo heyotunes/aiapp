@@ -1,34 +1,32 @@
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
-import { KEYS } from "@env";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../firebase";
+import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 
-console.log(KEYS);
 const Productscreen = () => {
-  const navigation = useNavigation();
-  const [response, setResponse] = useState(null);
-  const [body, setBody] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  let url;
-  if (response && response.data && response.data[0]) {
-    url = response.data[0].url;
-  }
+  useEffect(
+    () =>
+      onSnapshot(doc(db, "Users", auth.currentUser.uid), (snapshot) => {
+        if (!snapshot.exists()) {
+          navigation.navigate("Profile");
+        }
+      }),
+    []
+  );
 
+  const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
     interblack: require("../assets/fonts/Inter-Black.ttf"),
@@ -44,34 +42,32 @@ const Productscreen = () => {
     navigation.navigate("Home");
   };
 
-  const callAi = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("https://api.openai.com/v1/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${KEYS}`,
-        },
-        body: JSON.stringify({
-          model: "text-davinci-003",
-          prompt: body,
-          temperature: 0.8,
-          max_tokens: 60,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-        }),
-      });
-      const json = await res.json();
-      setResponse(json);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
+  const handlePress2 = () => {
+    navigation.navigate("General");
   };
-  console.log(response);
+  const handlePress3 = () => {
+    navigation.navigate("Grammar");
+  };
+  const handlePress4 = () => {
+    navigation.navigate("Language");
+  };
+  const handlePress5 = () => {
+    navigation.navigate("Note");
+  };
+  const handlePress6 = () => {
+    navigation.navigate("Name");
+  };
+  const handlePress7 = () => {
+    navigation.navigate("Description");
+  };
+
+  const handlePress8 = () => {
+    navigation.navigate("Summary");
+  };
+
+  const handlePress9 = () => {
+    navigation.navigate("Song");
+  };
 
   return (
     <View>
@@ -86,61 +82,188 @@ const Productscreen = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.Imagecontainer}>
-            <Text style={styles.Imagecontainertext}>NEURAL</Text>
+            <Text style={styles.Image2containertext}>Ai-Tools</Text>
           </View>
         </LinearGradient>
       </View>
-      <ScrollView>
-        <View style={styles.guidetext}>
-          <Text style={styles.guidetext1}>
-            This AI is capable of performing tasks like
-          </Text>
-        </View>
 
-        <View style={styles.guidetextlist}>
-          <Text style={styles.guidetext1}>
-            Grammar correction, Summarize Difficult Text, Generate Interview
-            Questions, Create Ad for products, Suggest names for Product,
-            Creates Essay outlines, Any thing you can think of.
-          </Text>
-        </View>
-
-        <View style={styles.guidetext}>
-          <Text style={styles.guidetext1}>
-            Type in your task in the prompt below and let AI respond with the
-            suitable response
-          </Text>
-        </View>
-
-        <View style={styles.view1}>
-          <Text style={styles.guidetext2}>
-            EG: "Create a list of 8 questions for my interview with a science
-            fiction author."
-          </Text>
-          <TextInput
-            placeholder="Type prompt..."
-            onChangeText={setBody}
-            value={body}
-            style={styles.input1}
-          />
-          <TouchableOpacity onPress={callAi} style={styles.touch1}>
-            <Text style={styles.btntext}>SUBMIT</Text>
-            <FontAwesome
-              style={styles.btntexticon1}
-              name="repeat"
-              size={34}
-              color="black"
-            />
+      <ScrollView style={styles.contentContainer}>
+        <View style={styles.aioptions}>
+          <TouchableOpacity onPress={handlePress2}>
+            <LinearGradient
+              colors={["#4375F6", "#312FA3"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress2}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/brain3.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
           </TouchableOpacity>
-        </View>
-
-        <View style={styles.respbox}>
-          {response && (
-            <Text style={styles.respboxtext}>
-              {JSON.stringify(response.choices[0].text)}
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Syntelligent</Text>
+            <Text style={styles.text11}>
+              Ask AI any questions and perform any task you can think of
             </Text>
-          )}
+          </View>
+
+          <TouchableOpacity onPress={handlePress9}>
+            <LinearGradient
+              colors={["#F6CF43", "#D8D240"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress9}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/song.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Song composer</Text>
+            <Text style={styles.text11}>Use AI to compose your song ideas</Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress3}>
+            <LinearGradient
+              colors={["#43F6CB", "#308D8D"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress3}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/grammar.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Grammar correction</Text>
+            <Text style={styles.text11}>
+              Corrects sentences into standard English.
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress4}>
+            <LinearGradient
+              colors={["#DDF643", "#989A2A"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress4}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/translate.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Translate language</Text>
+            <Text style={styles.text111}>
+              Translates English text into any language in the world
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress5}>
+            <LinearGradient
+              colors={["#FD6262", "#861A1A"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress5}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/hash.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Notes to summary</Text>
+            <Text style={styles.text11}>
+              Turn meeting notes into a summary.
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress6}>
+            <LinearGradient
+              colors={["#F8B654", "#96782A"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress6}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/thinking2.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Name generator</Text>
+            <Text style={styles.text11}>
+              Create product names from examples words.
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress7}>
+            <LinearGradient
+              colors={["#F66E43", "#9A3325"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress7}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/ad.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Ad from product description</Text>
+            <Text style={styles.text11}>
+              Turn a product description into ad copy.
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={handlePress8}>
+            <LinearGradient
+              colors={["#67FC88", "#1B751E"]}
+              style={styles.Aicontainer}
+            >
+              <View style={styles.imagesection}>
+                <TouchableOpacity onPress={handlePress8}>
+                  <Image
+                    style={styles.Image1}
+                    source={require("../assets/summarytext.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={styles.contentdescription}>
+            <Text style={styles.text1}>Summarize text</Text>
+            <Text style={styles.text111}>
+              Translates difficult text into simpler concepts.
+            </Text>
+          </View>
         </View>
+        <View style={styles.freespace}></View>
       </ScrollView>
     </View>
   );
@@ -149,145 +272,100 @@ const Productscreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 0,
-  },
-
-  input1: {
-    height: 60,
-    fontSize: 18,
-    width: 380,
-    paddingLeft: 10,
-    paddingTop: 0,
-    backgroundColor: "#F5F5F5",
-    color: "black",
-    borderWidth: 1,
-    borderColor: "#9D9D9D",
-    borderRadius: 10,
-  },
-
-  view1: {
-    justifyContent: "space-evenly",
     alignItems: "center",
-    borderTopWidth: 0,
-    borderColor: "gray",
-    paddingRight: 5,
-    paddingTop: 40,
-    paddingBottom: 35,
   },
   logocontainer: {
     alignItems: "center",
     backgroundColor: "blue",
-    height: 120,
+    height: 130,
     width: 430,
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  Aicontainer: {
+    alignItems: "center",
+    backgroundColor: "blue",
+    height: 200,
+    width: 375,
+    borderRadius: 20,
+    marginBottom: 40,
+    marginTop: 30,
+    marginLeft: -14,
+  },
   Imagecontainer: {
     marginTop: 40,
-    marginRight: 35,
+    marginRight: 40,
   },
   headertext: {
     fontSize: 45,
     color: "#2457C5",
     fontWeight: "bold",
-
+    fontFamily: "interblack",
     marginLeft: 10,
   },
 
-  Image2container: {
+  photocontainer: {
     marginTop: 40,
-    marginLeft: 15,
+    marginLeft: 30,
   },
-  Imagecontainertext: {
+  Image2container: {
+    marginTop: 45,
+    marginLeft: 25,
+  },
+  Image2containertext: {
+    fontSize: 25,
     color: "white",
-    fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Orbitron",
   },
-  btntexticon1: {
-    color: "white",
-    textAlign: "center",
-
-    fontSize: 20,
-    paddingLeft: 10,
-    paddingTop: 0,
-    fontWeight: "bold",
-  },
-  btntexticon: {
-    color: "white",
-    textAlign: "center",
-
-    fontSize: 20,
-    paddingLeft: 20,
-    paddingTop: 0,
-    fontWeight: "bold",
-  },
-  btntext: {
-    color: "white",
-    textAlign: "center",
-
-    fontSize: 20,
-
-    paddingTop: 0,
-    fontWeight: "bold",
-  },
-  touch1: {
-    alignItems: "center",
+  aioptions: {
     justifyContent: "center",
-    width: 300,
-    height: 50,
-    marginTop: 30,
-    flexDirection: "row",
-    borderRadius: 20,
-    backgroundColor: "#3997EE",
-  },
-  guidetext: {
-    justifyContent: "flex-end",
-    marginTop: 20,
     marginLeft: 30,
-    width: 350,
   },
-  guidetextlist: {
-    justifyContent: "flex-end",
-    marginTop: 5,
-    marginLeft: 30,
-    width: 350,
-  },
-  guidetext1: {
-    textAlign: "left",
-    fontSize: 17,
-    fontWeight: "400",
-    color: "#2266A5",
-    fontFamily: "interregular",
+  Image1: {
+    height: 100,
+    width: 100,
+    marginBottom: 100,
+    marginTop: 45,
   },
 
-  guidetext2: {
+  text1: {
+    alignSelf: "left",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
+    fontFamily: "interextra",
+    marginBottom: 5,
+  },
+  text11: {
+    alignSelf: "left",
     fontSize: 15,
-    fontWeight: "400",
-    color: "#7E7E7E",
-    paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    fontWeight: "light",
+    color: "black",
     fontFamily: "interregular",
+    marginBottom: 20,
   },
-  respbox: {
-    width: 370,
-    height: 350,
-    marginLeft: 22,
-    backgroundColor: "#3997EE",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 200,
-  },
-  respboxtext: {
-    fontSize: 18,
-    fontWeight: "500",
-    fontStyle: "normal",
-    color: "white",
-    textAlign: "justify",
+  text111: {
+    alignSelf: "left",
+    fontSize: 15,
+    fontWeight: "light",
+    color: "black",
     fontFamily: "interregular",
-    paddingLeft: 20,
-    paddingRight: 20,
+    marginBottom: 20,
+    width: 350,
+  },
+  contentdescription: {
+    justifyContent: "flex-end",
+    marginTop: -20,
+    marginLeft: 1,
+  },
+
+  contentContainer: {
+    paddingLeft: 5,
+  },
+  freespace: {
+    marginTop: 200,
+    marginBottom: 50,
   },
 });
 

@@ -15,16 +15,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
 const Homescreens = () => {
-  useEffect(
-    () =>
-      onSnapshot(doc(db, "Users", auth.currentUser.uid), (snapshot) => {
-        if (!snapshot.exists()) {
-          navigation.navigate("Profile");
-        }
-      }),
-    []
-  );
-
+  const [firstname, setFirstname] = useState("");
   const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
@@ -32,6 +23,21 @@ const Homescreens = () => {
     interextra: require("../assets/fonts/Inter-ExtraBold.ttf"),
     interregular: require("../assets/fonts/Inter-Regular.ttf"),
   });
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      onSnapshot(doc(db, "Users", auth.currentUser.uid), (snapshot) => {
+        if (!snapshot.exists()) {
+          navigation.navigate("Acct");
+        } else {
+          setFirstname(snapshot.get("firstname"));
+        }
+      });
+    } else {
+      // navigate to login screen or display a message asking user to log in
+      navigation.navigate("Login");
+    }
+  }, []);
 
   if (!fontsLoaded) {
     return null;
@@ -56,13 +62,13 @@ const Homescreens = () => {
             <Text style={styles.Image2containertext}>NEURAL</Text>
           </View>
           <View style={styles.Imagecontainer}>
-            <Image source={require("../assets/icon1.png")} />
+            <Image source={require("../assets/sa1.png")} />
           </View>
         </LinearGradient>
       </View>
 
       <View style={styles.photocontainer}>
-        <Text style={styles.headertext}>AI-TOOLS</Text>
+        <Text style={styles.headertext}>Welcome, {firstname}</Text>
       </View>
       <ScrollView style={styles.contentContainer}>
         <View style={styles.aioptions}>
@@ -104,8 +110,8 @@ const Homescreens = () => {
             </LinearGradient>
           </TouchableOpacity>
           <View style={styles.contentdescription}>
-            <Text style={styles.text1}>Syntelligent</Text>
-            <Text style={styles.text11}>
+            <Text style={styles.text1}>AI-Tools</Text>
+            <Text style={styles.text111}>
               Ask AI any questions and perform any task you can think of
             </Text>
           </View>
@@ -133,17 +139,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "blue",
     height: 200,
-    width: 350,
-    borderRadius: 5,
+    width: 375,
+    borderRadius: 20,
     marginBottom: 40,
     marginTop: 30,
+    marginLeft: -14,
   },
   Imagecontainer: {
     marginTop: 40,
     marginRight: 40,
   },
   headertext: {
-    fontSize: 45,
+    fontSize: 30,
     color: "#2457C5",
     fontWeight: "bold",
     fontFamily: "interblack",
@@ -152,7 +159,8 @@ const styles = StyleSheet.create({
 
   photocontainer: {
     marginTop: 40,
-    marginLeft: 30,
+    marginLeft: 0,
+    paddingLeft: 30,
   },
   Image2container: {
     marginTop: 45,
@@ -185,11 +193,21 @@ const styles = StyleSheet.create({
   },
   text11: {
     alignSelf: "left",
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "light",
     color: "black",
     fontFamily: "interregular",
     marginBottom: 20,
+    width: 400,
+  },
+  text111: {
+    alignSelf: "left",
+    fontSize: 15,
+    fontWeight: "light",
+    color: "black",
+    fontFamily: "interregular",
+    marginBottom: 20,
+    width: 350,
   },
   contentdescription: {
     justifyContent: "flex-end",
