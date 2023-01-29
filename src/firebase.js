@@ -1,9 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { FIRE } from "@env";
+
+console.log(FIRE);
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_zwtr5oCA1osq-Vr_zc0xu5v4bPzdxi4",
+  apiKey: `${FIRE}`,
   authDomain: "intelli-a2faa.firebaseapp.com",
   projectId: "intelli-a2faa",
   storageBucket: "intelli-a2faa.appspot.com",

@@ -91,23 +91,23 @@ const Productscreen = () => {
         <View style={styles.aioptions}>
           <TouchableOpacity onPress={handlePress2}>
             <LinearGradient
-              colors={["#4375F6", "#312FA3"]}
+              colors={["#43ECF6", "#DF41CF"]}
               style={styles.Aicontainer}
             >
               <View style={styles.imagesection}>
                 <TouchableOpacity onPress={handlePress2}>
                   <Image
                     style={styles.Image1}
-                    source={require("../assets/brain3.png")}
+                    source={require("../assets/scroll1.png")}
                   />
                 </TouchableOpacity>
               </View>
             </LinearGradient>
           </TouchableOpacity>
           <View style={styles.contentdescription}>
-            <Text style={styles.text1}>Syntelligent</Text>
+            <Text style={styles.text1}>Quick Script</Text>
             <Text style={styles.text11}>
-              Ask AI any questions and perform any task you can think of
+              Use AI to generate Quick Scripts for taklkshows and podcasts
             </Text>
           </View>
 
@@ -128,7 +128,9 @@ const Productscreen = () => {
           </TouchableOpacity>
           <View style={styles.contentdescription}>
             <Text style={styles.text1}>Song composer</Text>
-            <Text style={styles.text11}>Use AI to compose your song ideas</Text>
+            <Text style={styles.text11}>
+              Use AI to compose your song ideas to life
+            </Text>
           </View>
 
           <TouchableOpacity onPress={handlePress3}>
@@ -310,7 +312,7 @@ const styles = StyleSheet.create({
   },
   Image2container: {
     marginTop: 45,
-    marginLeft: 25,
+    marginLeft: 15,
   },
   Image2containertext: {
     fontSize: 25,
@@ -344,6 +346,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "interregular",
     marginBottom: 20,
+    paddingRight: 30,
   },
   text111: {
     alignSelf: "left",

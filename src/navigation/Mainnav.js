@@ -12,6 +12,7 @@ import Productscreen from "../screens/Productscreen";
 import Profilescreen from "../screens/Profilescreen";
 import RegisterScreen from "../screens/Registerscreen";
 import ResetPassword from "../screens/ResetPasswordScreen";
+import Welcomescreens from "../screens/Welcome";
 
 import Descriptionscreen from "../screens/Descriptionscreen";
 import Grammarscreen from "../screens/Grammarscreen";
@@ -103,6 +104,12 @@ const Control = () => {
 const Acctnav = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Welcome"
+        component={Welcomescreens}
+      />
+
       <Stack.Screen
         options={{ headerShown: false }}
         name="Login"

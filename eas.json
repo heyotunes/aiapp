@@ -1,0 +1,29 @@
+{
+  "cli": {
+    "version": ">= 3.3.2"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "env": {
+        "KEYS": "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",
+        "FIRE": "AIzaSyA_zwtr5oCA1osq-Vr_zc0xu5v4bPzdxi4"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "addysotayo@icloud.com",
+        "ascAppId": "1668564860",
+        "appleTeamId": "B2A88CCKQ3"
+      }
+    }
+  }
+}

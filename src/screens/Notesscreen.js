@@ -131,11 +131,17 @@ const Notesscreen = () => {
           </TouchableOpacity>
         </View>
 
-        {response && (
-          <Text style={styles.respboxtext}>
-            {JSON.stringify(response.choices[0].text.split("\n").join(""))}
-          </Text>
-        )}
+        <View style={styles.space}>
+          {isLoading ? (
+            <ActivityIndicator size="large" color="##EEBA00" />
+          ) : (
+            response && (
+              <Text style={styles.respboxtext}>
+                {JSON.stringify(response.choices[0].text.split("\n").join(""))}
+              </Text>
+            )
+          )}
+        </View>
       </ScrollView>
     </View>
   );
@@ -285,6 +291,9 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     letterSpacing: 1,
     lineHeight: 40,
+  },
+  space: {
+    marginBottom: 300,
   },
 });
 

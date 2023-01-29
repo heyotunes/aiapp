@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -26,6 +27,7 @@ const Imagescreens = () => {
   const [response, setResponse] = useState(null);
   const [body, setBody] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [downloadComplete, setDownloadComplete] = useState(false);
   let url;
   if (response && response.data && response.data[0]) {
     url = response.data[0].url;
@@ -68,6 +70,11 @@ const Imagescreens = () => {
     );
     console.log("Finished downloading to ", uri);
     addToMediaLibrary();
+    Alert.alert(
+      "Download complete",
+      "The image has been successfully downloaded.",
+      [{ text: "OK" }]
+    );
   };
 
   const handlePress1 = () => {
@@ -119,13 +126,13 @@ const Imagescreens = () => {
       <ScrollView>
         <View style={styles.guidetext}>
           <Text style={styles.guidetext1}>
-            Type in the text prompt below and let AI turn your text to beautiful
-            AI images
+            This AI is capable of generating stunning images with just a text
+            input. Use the template below to get started
           </Text>
         </View>
 
         <View style={styles.view1}>
-          <Text style={styles.guidetext2}>EG: " A white lion "</Text>
+          <Text style={styles.guidetext2}>"A white lion "</Text>
           <TextInput
             placeholder="Type prompt..."
             onChangeText={setBody}
@@ -152,7 +159,7 @@ const Imagescreens = () => {
         </View>
         {response && (
           <View style={styles.Downloadcontainer}>
-            <TouchableOpacity onPress={downloadImage} style={styles.touch1}>
+            <TouchableOpacity onPress={downloadImage} style={styles.touch2}>
               <Text style={styles.btntext}>DOWNLOAD</Text>
 
               <FontAwesome
@@ -204,6 +211,9 @@ const styles = StyleSheet.create({
     width: 430,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  notification: {
+    fontSize: 20,
   },
   Imagecontainer: {
     marginTop: 40,
@@ -257,9 +267,21 @@ const styles = StyleSheet.create({
   touch1: {
     alignItems: "center",
     justifyContent: "center",
-    width: 370,
+    width: 380,
     height: 50,
     marginTop: 10,
+
+    flexDirection: "row",
+    borderRadius: 20,
+    backgroundColor: "#3997EE",
+  },
+  touch2: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 380,
+    height: 50,
+    marginTop: 20,
+    marginRight: 200,
     flexDirection: "row",
     borderRadius: 20,
     backgroundColor: "#3997EE",
@@ -278,7 +300,7 @@ const styles = StyleSheet.create({
     fontFamily: "interregular",
   },
   guidetext2: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "400",
     color: "#7E7E7E",
     paddingBottom: 10,
@@ -286,12 +308,12 @@ const styles = StyleSheet.create({
   },
   Photocontainer: {
     justifyContent: "center",
-    marginLeft: 40,
-    marginTop: 30,
+    marginLeft: 30,
+    marginTop: 10,
     marginBottom: 0,
   },
   Downloadcontainer: {
-    marginLeft: 65,
+    marginLeft: 15,
     flexDirection: "column",
     marginBottom: 200,
   },

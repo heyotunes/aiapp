@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "aiapp",
-    "slug": "aiapp",
-    "version": "1.0.0",
+    "name": "neura AI",
+    "slug": "neura",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./src/assets/n2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/pj3.png",
+      "image": "./src/assets/neu1.png",
       "resizeMode": "cover",
       "backgroundColor": "#2D52D3"
     },
@@ -16,16 +16,23 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.heyotunes.neura",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/blue3.png",
-        "backgroundColor": "black"
+        "foregroundImage": "./src/assets/n2.png",
+        "backgroundColor": "#000000"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3992efdb-3a21-4048-a666-e2881044c2f4"
+      }
     }
   }
 }

@@ -15,6 +15,8 @@ import React from "react";
 import { auth } from "../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
+
 export default function ResetPassword({ navigation }) {
   let [email, setEmail] = React.useState("");
   let [errorMessage, setErrorMessage] = React.useState("");
@@ -29,11 +31,20 @@ export default function ResetPassword({ navigation }) {
       });
   };
 
+  const handlePress1 = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <LinearGradient
       colors={["#1D76C9", "#2D52D3"]}
       style={styles.logocontainer}
     >
+      <View style={styles.Image2container}>
+        <TouchableOpacity onPress={handlePress1}>
+          <Ionicons name="chevron-back" size={34} color="white" />
+        </TouchableOpacity>
+      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : null}
         keyboardVerticalOffset={60}
@@ -77,8 +88,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    marginTop: 300,
+    marginTop: 200,
     alignItems: "center",
+  },
+  Image2container: {
+    marginTop: 80,
+    marginRight: 340,
   },
   touch1: {
     justifyContent: "center",
@@ -94,5 +109,6 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 20,
+    fontFamily: "interextra",
   },
 });

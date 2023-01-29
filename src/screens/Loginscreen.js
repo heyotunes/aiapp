@@ -23,7 +23,6 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { signInWithGoogle } from "../firebase";
 
 import { auth } from "../firebase";
-WebBrowser.maybeCompleteAuthSession();
 
 const Loginscreens = () => {
   const navigation = useNavigation();
@@ -59,19 +58,19 @@ const Loginscreens = () => {
     }
   };
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: `${GOOGLE_KEYS}`,
-  });
-  useEffect(() => {
-    console.log(response);
-    if (response?.type === "success") {
-      const { id_token } = response.params;
+  //const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  //clientId: `${GOOGLE_KEYS}`,
+  //});
+  //useEffect(() => {
+  //console.log(response);
+  //if (response?.type === "success") {
+  //  const { id_token } = response.params;
 
-      const credential = GoogleAuthProvider.credential(id_token);
-      signInWithCredential(auth, credential);
-      navigation.navigate("Main", { response });
-    }
-  }, [response]);
+  // const credential = GoogleAuthProvider.credential(id_token);
+  // signInWithCredential(auth, credential);
+  // navigation.navigate("Main", { response });
+  // }
+  //}, [response]);
   const [fontsLoaded] = useFonts({
     Orbitron: require("../assets/fonts/Orbitron-Black.ttf"),
     interblack: require("../assets/fonts/Inter-Black.ttf"),
@@ -88,10 +87,10 @@ const Loginscreens = () => {
       style={styles.logocontainer}
     >
       <View style={styles.Imagecontainer}>
-        <Image source={require("../assets/sa2.png")} />
+        <Image source={require("../assets/sat3.png")} />
       </View>
       <View style={styles.Textcontainer}>
-        <Text style={styles.logotext}>NEURAL</Text>
+        <Text style={styles.logotext}>NEURA</Text>
       </View>
 
       <View style={styles.Textcontainer1}>
@@ -140,18 +139,6 @@ const Loginscreens = () => {
           <Text style={styles.btntext}>Sign In</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.Btncontainer}>
-        <TouchableOpacity
-          disabled={!request}
-          onPress={() => {
-            promptAsync();
-          }}
-          style={styles.touch1}
-        >
-          <Text style={styles.btntext}>Continue with Google</Text>
-          <Entypo name="mail" size={30} color="white" style={styles.btnicon} />
-        </TouchableOpacity>
-      </View>
     </LinearGradient>
   );
 };
@@ -171,15 +158,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
+    letterSpacing: 15,
   },
   Textcontainer: {
     marginTop: 10,
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
+    marginLeft: 10,
   },
   Textcontainer1: {
-    marginTop: 30,
+    marginTop: 60,
   },
   introtext: {
     fontSize: 15,
@@ -206,7 +192,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 18,
-
+    fontFamily: "interextra",
     paddingTop: 15,
     paddingBottom: 15,
   },
@@ -214,7 +200,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 23,
-    fontFamily: "interextra",
+    fontFamily: "interblack",
     paddingTop: 15,
   },
   touch1: {

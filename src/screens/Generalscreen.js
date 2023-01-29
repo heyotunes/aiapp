@@ -58,7 +58,7 @@ const Generalscreen = () => {
           model: "text-davinci-003",
           prompt: body,
           temperature: 0.8,
-          max_tokens: 120,
+          max_tokens: 160,
           top_p: 1,
           frequency_penalty: 0,
           presence_penalty: 0,
@@ -87,28 +87,22 @@ const Generalscreen = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.Imagecontainer}>
-            <Text style={styles.Imagecontainertext}>Syntelligent</Text>
+            <Text style={styles.Imagecontainertext}>Quick-Script</Text>
           </View>
         </LinearGradient>
       </View>
       <ScrollView>
         <View style={styles.guidetext}>
           <Text style={styles.guidetext1}>
-            This AI is capable of performing any general task you can think of
-          </Text>
-        </View>
-
-        <View style={styles.guidetext}>
-          <Text style={styles.guidetext1}>
-            Type in your task in the prompt below and let AI respond with the
-            suitable response
+            This AI is capable of generating scripts like Intros and Outros for
+            youtube channels, podcast and talkshows. Use the template below to
+            get started.
           </Text>
         </View>
 
         <View style={styles.view1}>
           <Text style={styles.guidetext2}>
-            "Create a list of 8 questions for my interview with a science
-            fiction author."
+            "Create an intro script for a music reaction youtube channel"
           </Text>
           <TextInput
             placeholder="Type prompt..."
@@ -117,7 +111,7 @@ const Generalscreen = () => {
             style={styles.input1}
           />
           <TouchableOpacity onPress={callAi} style={styles.touch1}>
-            <Text style={styles.btntext}>SUBMIT</Text>
+            <Text style={styles.btntext}>Get script</Text>
             <FontAwesome
               style={styles.btntexticon1}
               name="repeat"
@@ -127,11 +121,15 @@ const Generalscreen = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.respbox}>
-          {response && (
-            <Text style={styles.respboxtext}>
-              {JSON.stringify(response.choices[0].text)}
-            </Text>
+        <View style={styles.space}>
+          {isLoading ? (
+            <ActivityIndicator size="large" color="##EEBA00" />
+          ) : (
+            response && (
+              <Text style={styles.respboxtext}>
+                {JSON.stringify(response.choices[0].text.split("\n").join(""))}
+              </Text>
+            )
           )}
         </View>
       </ScrollView>
@@ -151,10 +149,10 @@ const styles = StyleSheet.create({
     width: 380,
     paddingLeft: 10,
     paddingTop: 0,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "white",
     color: "black",
     borderWidth: 1,
-    borderColor: "#9D9D9D",
+    borderColor: "black",
     borderRadius: 10,
   },
 
@@ -227,12 +225,12 @@ const styles = StyleSheet.create({
   touch1: {
     alignItems: "center",
     justifyContent: "center",
-    width: 300,
+    width: 370,
     height: 50,
     marginTop: 30,
     flexDirection: "row",
     borderRadius: 20,
-    backgroundColor: "#3997EE",
+    backgroundColor: "#36C6CF",
   },
   guidetext: {
     justifyContent: "flex-end",
@@ -265,9 +263,9 @@ const styles = StyleSheet.create({
   },
   respbox: {
     width: 370,
-    height: 350,
+    height: 550,
     marginLeft: 22,
-    backgroundColor: "#3997EE",
+    backgroundColor: "#F3F3F3",
     justifyContent: "center",
     borderRadius: 10,
     marginBottom: 200,
@@ -276,11 +274,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     fontStyle: "normal",
-    color: "white",
-    textAlign: "justify",
+    color: "black",
+
     fontFamily: "interregular",
-    paddingLeft: 20,
+    paddingLeft: 35,
     paddingRight: 20,
+    marginBottom: 100,
+    letterSpacing: 1,
+    lineHeight: 30,
+  },
+  space: {
+    marginBottom: 300,
   },
 });
 

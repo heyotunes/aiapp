@@ -56,12 +56,17 @@ const Acctscreens = () => {
         style={styles.logocontainer}
       >
         <View style={styles.Image2container}>
-          <Text style={styles.Image2containertext}>NEURAL</Text>
+          <Text style={styles.Image2containertext}>NEURA</Text>
         </View>
         <View style={styles.Imagecontainer}>
-          <Image source={require("../assets/sa1.png")} />
+          <Image source={require("../assets/sat1.png")} />
         </View>
       </LinearGradient>
+
+      <View style={styles.h1cont}>
+        <Text style={styles.h1}>User profile</Text>
+      </View>
+
       <View style={styles.btncontainer}>
         <View style={styles.ptext1}>
           <View style={styles.ptext11}>
@@ -118,19 +123,38 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
+    letterSpacing: 15,
   },
   Imagecontainer: {
-    marginTop: 40,
-    marginRight: 40,
+    marginTop: 50,
+    marginRight: 35,
+  },
+  h1: {
+    fontSize: 30,
+    textAlign: "center",
+    color: "#2266A5",
+    fontFamily: "interblack",
+    marginBottom: 0,
+    width: 400,
+  },
+  h1cont: {
+    marginTop: 30,
+    marginLeft: 0,
+    paddingLeft: 0,
+    paddingBottom: 20,
+    borderBottomColor: "#1D76C9",
+    borderBottomWidth: 1,
   },
   ptext1: {
-    flexDirection: "column",
-    marginTop: 20,
+    flexDirection: "row",
+    marginTop: 100,
     justifyContent: "space-between",
     marginVertical: 0,
+    justifyContent: "center",
+    marginLeft: 70,
   },
   ptext11: {
-    width: "40%",
+    width: "55%",
   },
   text1: {
     alignSelf: "left",
@@ -143,8 +167,8 @@ const styles = StyleSheet.create({
   },
   text11: {
     alignSelf: "left",
-    fontSize: 20,
-
+    fontSize: 18,
+    textAlign: "justify",
     color: "#8E8E8E",
     fontFamily: "interregular",
     marginBottom: 50,
@@ -167,9 +191,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 13 },
   },
   btncontainer: {
-    display: "flex",
-    marginLeft: 50,
-    marginTop: 30,
+    marginLeft: 0,
+    marginTop: 0,
   },
   btn1: {
     color: "white",

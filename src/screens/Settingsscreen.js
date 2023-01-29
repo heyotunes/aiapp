@@ -36,10 +36,10 @@ const Settingsscreen = () => {
         style={styles.logocontainer}
       >
         <View style={styles.Image2container}>
-          <Text style={styles.Image2containertext}>NEURAL</Text>
+          <Text style={styles.Image2containertext}>NEURA</Text>
         </View>
         <View style={styles.Imagecontainer}>
-          <Image source={require("../assets/icon1.png")} />
+          <Image source={require("../assets/sat1.png")} />
         </View>
       </LinearGradient>
 
@@ -67,10 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  Imagecontainer: {
-    marginTop: 50,
-    marginRight: 20,
-  },
+
   headertext: {
     fontSize: 45,
     color: "#2457C5",
@@ -87,14 +84,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
+    letterSpacing: 15,
+  },
+  Imagecontainer: {
+    marginTop: 50,
+    marginRight: 35,
   },
 
-  Imagecontainertext: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-    fontFamily: "Orbitron",
-  },
   touch1: {
     borderBottomWidth: 1,
     borderColor: "#1D76C9",

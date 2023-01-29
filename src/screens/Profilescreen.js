@@ -25,7 +25,8 @@ const Profilescreen = () => {
   const [firstname, setFirstname] = useState(null);
   const [lastname, setLastname] = useState(null);
   const [occupation, setOccupation] = useState(null);
-  const [phonenumber, setPhonenumber] = useState(null);
+  const [purpose, setPurpose] = useState(null);
+  const [isstudent, setIsstudent] = useState(null);
   const [college, setCollege] = useState(null);
 
   const [fontsLoaded] = useFonts({
@@ -47,7 +48,8 @@ const Profilescreen = () => {
       firstname: firstname,
       lastname: lastname,
       occupation: occupation,
-      phonenumber: phonenumber,
+      isstudent: isstudent,
+      purpose: purpose,
       college: college,
       timestamp: serverTimestamp(),
     })
@@ -58,6 +60,8 @@ const Profilescreen = () => {
         alert(error.message);
       });
   };
+
+  const incompleteForm = !firstname || !lastname || !college;
 
   const submitform = () => {
     updateUserProfile();
@@ -103,7 +107,25 @@ const Profilescreen = () => {
               style={styles.inputText}
               value={occupation}
               onChangeText={setOccupation}
-              placeholder="What kind of job are you into?"
+              placeholder="Enter job"
+            />
+
+            <Text style={styles.textguide}>
+              What will you be using neural for
+            </Text>
+            <TextInput
+              style={styles.inputText}
+              value={purpose}
+              onChangeText={setPurpose}
+              placeholder="Enter answer"
+            />
+
+            <Text style={styles.textguide}>Are you a student?</Text>
+            <TextInput
+              style={styles.inputText}
+              value={isstudent}
+              onChangeText={setIsstudent}
+              placeholder="Enter answer yes or no"
             />
 
             <Text style={styles.textguide}>College</Text>
@@ -111,7 +133,7 @@ const Profilescreen = () => {
               style={styles.inputText}
               value={college}
               onChangeText={setCollege}
-              placeholder="Enter your school name"
+              placeholder="Enter answer"
             />
           </View>
 
@@ -142,7 +164,7 @@ const styles = StyleSheet.create({
   },
   inputviewcontainer: {
     marginTop: 180,
-    marginLeft: -280,
+    marginLeft: -275,
   },
   inputText: {
     fontSize: 15,

@@ -59,10 +59,10 @@ const Homescreens = () => {
           style={styles.logocontainer}
         >
           <View style={styles.Image2container}>
-            <Text style={styles.Image2containertext}>NEURAL</Text>
+            <Text style={styles.Image2containertext}>NEURA</Text>
           </View>
           <View style={styles.Imagecontainer}>
-            <Image source={require("../assets/sa1.png")} />
+            <Image source={require("../assets/sat1.png")} />
           </View>
         </LinearGradient>
       </View>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   logocontainer: {
     alignItems: "center",
     backgroundColor: "blue",
-    height: 130,
+    height: 120,
     width: 430,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -145,22 +145,22 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginLeft: -14,
   },
-  Imagecontainer: {
-    marginTop: 40,
-    marginRight: 40,
-  },
+
   headertext: {
     fontSize: 30,
-    color: "#2457C5",
+    color: "#2266A5",
     fontWeight: "bold",
     fontFamily: "interblack",
     marginLeft: 10,
   },
 
   photocontainer: {
-    marginTop: 40,
+    marginTop: 30,
     marginLeft: 0,
     paddingLeft: 30,
+    paddingBottom: 10,
+    borderBottomColor: "#1D76C9",
+    borderBottomWidth: 1,
   },
   Image2container: {
     marginTop: 45,
@@ -171,6 +171,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontFamily: "Orbitron",
+    letterSpacing: 15,
+  },
+  Imagecontainer: {
+    marginTop: 50,
+    marginRight: 35,
   },
   aioptions: {
     justifyContent: "center",
